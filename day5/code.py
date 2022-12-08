@@ -7,10 +7,10 @@ The Elves don't want to interrupt the crane operator during this delicate proced
 
 They do, however, have a drawing of the starting stacks of crates and the rearrangement procedure (your puzzle input). For example:
 
-    [D]    
-[N] [C]    
+    [D]
+[N] [C]
 [Z] [M] [P]
- 1   2   3 
+ 1   2   3
 
 move 1 from 2 to 1
 move 3 from 1 to 3
@@ -21,10 +21,10 @@ In this example, there are three stacks of crates. Stack 1 contains two crates: 
 
 Then, the rearrangement procedure is given. In each step of the procedure, a quantity of crates is moved from one stack to a different stack. In the first step of the above rearrangement procedure, one crate is moved from stack 2 to stack 1, resulting in this configuration:
 
-[D]        
-[N] [C]    
+[D]
+[N] [C]
 [Z] [M] [P]
- 1   2   3 
+ 1   2   3
 
 In the second step, three crates are moved from stack 1 to stack 3. Crates are moved one at a time, so the first crate to be moved (D) ends up below the second and third crates:
 
@@ -55,13 +55,14 @@ The Elves just need to know which crate will end up on top of each stack; in thi
 After the rearrangement procedure completes, what crate ends up on top of each stack?
 """
 
-
-# 3rd party
-from collections import defaultdict, deque
+# stdlib
 import pprint
 import re
-from domdf_python_tools.paths import PathPlus
+from collections import defaultdict, deque
+
+# 3rd party
 from domdf_python_tools.iterative import chunks
+from domdf_python_tools.paths import PathPlus
 
 # Read input file
 starting_stacks, rearrangement_procedure = PathPlus("input.txt").read_text().rstrip().split('\n\n')
@@ -70,7 +71,7 @@ starting_stacks, rearrangement_procedure = PathPlus("input.txt").read_text().rst
 # Parse starting stacks
 stacks = defaultdict(deque)
 # Left on deque = top of stack, right = bottom
-for row in [list(chunks(x, 4)) for x in starting_stacks.split("\n")]:
+for row in [list(chunks(x, 4)) for x in starting_stacks.split('\n')]:
 	for stack_idx, column in enumerate(row):
 		column = column.strip()
 		if column.isdigit():
@@ -80,9 +81,9 @@ for row in [list(chunks(x, 4)) for x in starting_stacks.split("\n")]:
 
 # pprint.pprint(dict(stacks), width=120)
 
-for move in rearrangement_procedure.split("\n"):
+for move in rearrangement_procedure.split('\n'):
 	# print(move)
-	match = re.match("^move (?P<qty>\d+) from (?P<from>\d+) to (?P<to>\d+)$", move)
+	match = re.match(r"^move (?P<qty>\d+) from (?P<from>\d+) to (?P<to>\d+)$", move)
 	assert match is not None, move
 	move_data = {k: int(v) for k, v in match.groupdict().items()}
 	# print(move_data)
@@ -91,7 +92,7 @@ for move in rearrangement_procedure.split("\n"):
 	# pprint.pprint(dict(stacks), width=120)
 	# input(">")
 
-top_crates = "".join(stacks[stack_idx + 1][0][1] for stack_idx in range(len(stacks)))
+top_crates = ''.join(stacks[stack_idx + 1][0][1] for stack_idx in range(len(stacks)))
 print("After rearranging the crates, the top crates are:", top_crates)  # SPFMVDTZT
 
 # === Part 2 ===
@@ -104,17 +105,17 @@ The CrateMover 9001 is notable for many new and exciting features: air condition
 
 Again considering the example above, the crates begin in the same configuration:
 
-    [D]    
-[N] [C]    
+    [D]
+[N] [C]
 [Z] [M] [P]
- 1   2   3 
+ 1   2   3
 
 Moving a single crate from stack 2 to stack 1 behaves the same as before:
 
-[D]        
-[N] [C]    
+[D]
+[N] [C]
 [Z] [M] [P]
- 1   2   3 
+ 1   2   3
 
 However, the action of moving three crates from stack 1 to stack 3 means that those three moved crates stay in the same order, resulting in this new configuration:
 
@@ -148,7 +149,7 @@ Before the rearrangement process finishes, update your simulation so that the El
 # Parse starting stacks again
 stacks = defaultdict(deque)
 # Left on deque = top of stack, right = bottom
-for row in [list(chunks(x, 4)) for x in starting_stacks.split("\n")]:
+for row in [list(chunks(x, 4)) for x in starting_stacks.split('\n')]:
 	for stack_idx, column in enumerate(row):
 		column = column.strip()
 		if column.isdigit():
@@ -158,9 +159,9 @@ for row in [list(chunks(x, 4)) for x in starting_stacks.split("\n")]:
 
 # pprint.pprint(dict(stacks), width=120)
 
-for move in rearrangement_procedure.split("\n"):
+for move in rearrangement_procedure.split('\n'):
 	# print(move)
-	match = re.match("^move (?P<qty>\d+) from (?P<from>\d+) to (?P<to>\d+)$", move)
+	match = re.match(r"^move (?P<qty>\d+) from (?P<from>\d+) to (?P<to>\d+)$", move)
 	assert match is not None, move
 	move_data = {k: int(v) for k, v in match.groupdict().items()}
 	# print(move_data)
@@ -173,6 +174,5 @@ for move in rearrangement_procedure.split("\n"):
 	# pprint.pprint(dict(stacks), width=120)
 	# input(">")
 
-top_crates = "".join(stacks[stack_idx + 1][0][1] for stack_idx in range(len(stacks)))
+top_crates = ''.join(stacks[stack_idx + 1][0][1] for stack_idx in range(len(stacks)))
 print("After rearranging the crates, the top crates are:", top_crates)  # ZFSJBPRFP
-

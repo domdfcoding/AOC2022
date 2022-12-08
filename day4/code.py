@@ -45,7 +45,6 @@ In how many assignment pairs does one range fully contain the other?
 
 # 3rd party
 from domdf_python_tools.paths import PathPlus
-from domdf_python_tools.utils import head
 
 # Read input file and split into elf pairs
 elf_pairs = PathPlus("input.txt").read_text().strip().split('\n')
