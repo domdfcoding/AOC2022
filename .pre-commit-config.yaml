@@ -6,7 +6,7 @@ ci:
 repos:
 
  - repo: https://github.com/pre-commit/pre-commit-hooks
-   rev: v3.4.0
+   rev: v4.5.0
    hooks:
     - id: check-added-large-files
     - id: check-ast
@@ -34,17 +34,17 @@ repos:
     - id: bind-requirements
 
  - repo: https://github.com/domdfcoding/flake2lint
-   rev: v0.4.2
+   rev: v0.4.3
    hooks:
     - id: flake2lint
 
  - repo: https://github.com/pre-commit/pygrep-hooks
-   rev: v1.9.0
+   rev: v1.10.0
    hooks:
     - id: python-no-eval
 
  - repo: https://github.com/asottile/pyupgrade
-   rev: v2.12.0
+   rev: v3.15.0
    hooks:
     - id: pyupgrade
       args:
@@ -52,18 +52,18 @@ repos:
        - --keep-runtime-typing
 
  - repo: https://github.com/Lucas-C/pre-commit-hooks
-   rev: v1.3.1
+   rev: v1.5.4
    hooks:
     - id: remove-crlf
     - id: forbid-crlf
 
  - repo: https://github.com/python-formate/formate
-   rev: v0.4.10
+   rev: v0.7.0
    hooks:
     - id: formate
 
  - repo: https://github.com/domdfcoding/dep_checker
-   rev: v0.7.0
+   rev: v0.8.0
    hooks:
     - id: dep_checker
       args:
